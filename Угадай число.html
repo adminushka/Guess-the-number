@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Угадай Число!</title>
+  
+</head>
+<body>
+ <div id="wrap">		
+		<div id="info">Загадано 4х-значное число:</div>
+		<input id="answer">
+		<button id="send" onclick="checkAnswer()">Ответить</button>
+	</div>
+  <script type="text/javascript">
+
+	var randomNum = Math.round((Math.random() * (999 - 1000) + 1000));
+	var countStep = 1;
+	
+	function checkAnswer(){
+
+		var info;
+		var answer = document.getElementById('answer');
+		var result = Math.abs(randomNum - answer.value);
+        
+
+		if( result == 0 ){
+			info = 'Поздравляем! Вы угадали число!';
+			answer.style.display = 'none';
+			document.getElementById('send').style.display = 'none';
+		}else if( result < 10 ){
+			info = 'Очень тепло! (ошиблись в диапазоне от 1 до 10)';
+		}else if( result < 100 ){
+			info = 'Тепло! (ошиблись в диапазоне от 10 до 100)';
+		}else if( result < 1000 ){
+			info = 'Холодно! (ошиблись в диапазоне от 100 до 1000)';
+		}else{
+			info = 'Очень холодно! (ошиблись на 1000 и более)';
+		}
+
+		document.getElementById('info').innerHTML += '<p>#' + countStep + ' Вы ответили: ' + answer.value + ' - ' + info + '</p>';
+		answer.value = '';
+		countStep++;
+	}
+</script>
+  
+</body>
+</html>
